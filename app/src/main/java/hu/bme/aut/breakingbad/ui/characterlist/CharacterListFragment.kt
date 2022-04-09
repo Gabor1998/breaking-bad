@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.breakingbad.R
 import hu.bme.aut.breakingbad.databinding.FragmentCharacterListBinding
 
+@AndroidEntryPoint
 class CharacterListFragment : Fragment() {
 
     private lateinit var binding: FragmentCharacterListBinding
