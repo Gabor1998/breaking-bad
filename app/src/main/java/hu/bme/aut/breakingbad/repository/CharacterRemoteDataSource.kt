@@ -5,7 +5,7 @@ import hu.bme.aut.breakingbad.model.Character
 import javax.inject.Inject
 
 class CharacterRemoteDataSource @Inject constructor(
-    breakingBadApi: BreakingBadApi
+    private val breakingBadApi: BreakingBadApi
 ) {
 
     fun getCharacters(): List<Character> {

@@ -5,7 +5,7 @@ import hu.bme.aut.breakingbad.model.Character
 import javax.inject.Inject
 
 class CharacterLocalDataSource @Inject constructor(
-    characterDao: CharacterDao
+    private val characterDao: CharacterDao
 ) {
 
     fun getCharacters(): List<Character> {
