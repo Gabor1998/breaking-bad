@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/character_list">
+
+    <fragment
+        android:id="@+id/character_list"
+        android:name="hu.bme.aut.breakingbad.ui.characterlist.CharacterListFragment"
+        android:label="*Lista"
+        tools:layout="@layout/fragment_character_list">
+        <action
+            android:id="@+id/action_to_character_detail"
+            app:destination="@id/character_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/character_detail"
+        android:name="hu.bme.aut.breakingbad.ui.characterdetail.CharacterDetailFragment"
+        android:label="*Detail'"
+        tools:layout="@layout/fragment_character_detail" />
+</navigation>
