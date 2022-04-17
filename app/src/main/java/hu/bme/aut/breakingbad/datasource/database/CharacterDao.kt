@@ -5,11 +5,11 @@ import javax.inject.Inject
 
 class CharacterDao @Inject constructor() {
 
-    fun getCharacters(): List<CharacterEntity> {
+    fun getCharactersByName(name: String?): List<CharacterEntity> {
         TODO()
     }
 
-    fun getCharacter(): CharacterEntity? {
+    fun getCharacter(id: Int): CharacterEntity? {
         TODO()
     }
 }

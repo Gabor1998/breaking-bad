@@ -8,11 +8,21 @@ class CharacterRepository @Inject constructor(
     private val characterRemoteDataSource: CharacterRemoteDataSource
 ) {
 
-    fun getCharacters(): List<Character> {
-        TODO()
+    suspend fun getCharactersByName(name: String): List<Character> {
+        characterRemoteDataSource.getCharactersByName(name).onSuccess {
+            return it
+        }.onFailure {
+            return characterLocalDataSource.getCharactersByName(name)
+        }
+        return emptyList()
     }
 
-    fun getCharacter(): Character? {
-        TODO()
+    suspend fun getCharacter(id: Int): Character? {
+        characterRemoteDataSource.getCharacter(id).onSuccess {
+            return it
+        }.onFailure {
+            return characterLocalDataSource.getCharacter(id)
+        }
+        return null
     }
 }
