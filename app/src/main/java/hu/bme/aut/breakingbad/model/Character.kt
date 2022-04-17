@@ -12,3 +12,16 @@ data class Character(
     val portrayed: String? = null,
     val category: String? = null
 )
+
+fun Character.toCharacterEntity() = CharacterEntity(
+    id = id,
+    name = name,
+    birthday = birthday,
+    occupation = occupation,
+    img = img,
+    status = status,
+    nickname = nickname,
+    appearance = appearance,
+    portrayed = portrayed,
+    category = category
+)
