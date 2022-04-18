@@ -9,7 +9,7 @@ import hu.bme.aut.breakingbad.model.CharacterEntity
 @Dao
 interface CharacterDao {
 
-    @Query("SELECT * FROM characters WHERE name LIKE '%'||:name||'%'")
+    @Query("SELECT * FROM characters WHERE :name IS NULL OR name LIKE '%'||:name||'%'")
     suspend fun getCharactersByName(name: String?): List<CharacterEntity>
 
     @Query("SELECT * FROM characters WHERE id = :id")
