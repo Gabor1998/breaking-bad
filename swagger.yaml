@@ -1,0 +1,151 @@
+swagger: "2.0"
+info:
+  description: "The Breaking Bad API is a collection of information on the Vince Gilligan series Breaking Bad, as well as his incredible spin-off Better Call Saul. This site is designed to make it easy on the developer to see what HTTP requests are possible, and what information is available."
+  version: "1.0.0"
+  title: "Swagger Breaking Bad"
+host: "breakingbadapi.com"
+basePath: "/api"
+tags:
+  - name: "character"
+    description: "Everything about the characters of Breaking Bad"
+    externalDocs:
+      description: "Find out more"
+      url: "https://breakingbadapi.com/documentation"
+schemes:
+  - "https"
+paths:
+  /characters:
+    get:
+      tags:
+        - "character"
+      summary: "Search characters by name"
+      operationId: "getCharactersByName"
+      parameters:
+        - in: query
+          name: name
+          required: false
+          type: string
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Character"
+        "429":
+          description: "Reach API limit, regain access after 24 hours."
+    post:
+      tags:
+        - "character"
+      summary: "Add a new character"
+      description: ""
+      operationId: "addCharacter"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "character"
+          description: "Character object that needs to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Character"
+      responses:
+        "405":
+          description: "Invalid input"
+    put:
+      tags:
+        - "character"
+      summary: "Update an existing character"
+      description: ""
+      operationId: "updateCharacter"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "character"
+          description: "Character object that needs to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Character"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Character not found"
+        "405":
+          description: "Validation exception"
+  /characters/{id}:
+    get:
+      summary: Info for a specific character
+      operationId: getCharacter
+      tags:
+        - "character"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the character to retrieve
+          type: integer
+      responses:
+        '200':
+          description: Expected response to a valid request
+          schema:
+            $ref: "#/definitions/Character"
+        "429":
+          description: "Reach API limit, regain access after 24 hours."
+    delete:
+      tags:
+        - "character"
+      summary: "Deletes a character"
+      description: ""
+      operationId: "deleteCharacter"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Character id to delete"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Character not found"
+definitions:
+  Character:
+    type: "object"
+    required:
+      - "char_id"
+      - "name"
+    properties:
+      char_id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      birthday:
+        type: "string"
+      occupation:
+        type: "array"
+        items:
+          type: "string"
+      img:
+        type: "string"
+      status:
+        type: "string"
+      nickname:
+        type: "string"
+      appearance:
+        type: "array"
+        items:
+          type: "integer"
+      portrayed:
+        type: "string"
+      category:
+        type: "string"

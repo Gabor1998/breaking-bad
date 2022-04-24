@@ -1,15 +1,20 @@
 package hu.bme.aut.breakingbad.datasource.database
 
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import hu.bme.aut.breakingbad.model.CharacterEntity
-import javax.inject.Inject
 
-class CharacterDao @Inject constructor() {
+@Dao
+interface CharacterDao {
 
-    fun getCharacters(): List<CharacterEntity> {
-        TODO()
-    }
+    @Query("SELECT * FROM characters WHERE :name IS NULL OR name LIKE '%'||:name||'%'")
+    suspend fun getCharactersByName(name: String?): List<CharacterEntity>
 
-    fun getCharacter(): CharacterEntity? {
-        TODO()
-    }
+    @Query("SELECT * FROM characters WHERE id = :id")
+    suspend fun getCharacter(id: Int): CharacterEntity?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCharacters(characters: List<CharacterEntity>)
 }
