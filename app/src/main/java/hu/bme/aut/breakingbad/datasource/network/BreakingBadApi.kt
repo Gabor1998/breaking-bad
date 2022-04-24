@@ -1,15 +1,15 @@
 package hu.bme.aut.breakingbad.datasource.network
 
 import hu.bme.aut.breakingbad.model.CharacterDto
-import javax.inject.Inject
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
-class BreakingBadApi @Inject constructor() {
+interface BreakingBadApi {
 
-    fun getCharacters(): List<CharacterDto> {
-        TODO()
-    }
+    @GET("characters")
+    suspend fun getCharactersByName(@Query("name") name: String?): List<CharacterDto>
 
-    fun getCharacter(): CharacterDto {
-        TODO()
-    }
+    @GET("characters/{id}")
+    suspend fun getCharacter(@Path("id") id: Int): CharacterDto
 }
