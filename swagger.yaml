@@ -6,15 +6,18 @@ info:
 host: "breakingbadapi.com"
 basePath: "/api"
 tags:
-- name: "character"
-  description: "Everything about the characters of Breaking Bad"
+  - name: "character"
+    description: "Everything about the characters of Breaking Bad"
+    externalDocs:
+      description: "Find out more"
+      url: "https://breakingbadapi.com/documentation"
 schemes:
-- "https"
+  - "https"
 paths:
   /characters:
     get:
       tags:
-      - "character"
+        - "character"
       summary: "Search characters by name"
       operationId: "getCharactersByName"
       parameters:
@@ -31,6 +34,50 @@ paths:
               $ref: "#/definitions/Character"
         "429":
           description: "Reach API limit, regain access after 24 hours."
+    post:
+      tags:
+        - "character"
+      summary: "Add a new character"
+      description: ""
+      operationId: "addCharacter"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "character"
+          description: "Character object that needs to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Character"
+      responses:
+        "405":
+          description: "Invalid input"
+    put:
+      tags:
+        - "character"
+      summary: "Update an existing character"
+      description: ""
+      operationId: "updateCharacter"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "character"
+          description: "Character object that needs to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Character"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Character not found"
+        "405":
+          description: "Validation exception"
   /characters/{id}:
     get:
       summary: Info for a specific character
@@ -50,12 +97,32 @@ paths:
             $ref: "#/definitions/Character"
         "429":
           description: "Reach API limit, regain access after 24 hours."
+    delete:
+      tags:
+        - "character"
+      summary: "Deletes a character"
+      description: ""
+      operationId: "deleteCharacter"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Character id to delete"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Character not found"
 definitions:
   Character:
     type: "object"
     required:
-    - "char_id"
-    - "name"
+      - "char_id"
+      - "name"
     properties:
       char_id:
         type: "integer"
