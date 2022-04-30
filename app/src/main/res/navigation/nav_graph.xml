@@ -19,5 +19,12 @@
         android:id="@+id/character_detail"
         android:name="hu.bme.aut.breakingbad.ui.characterdetail.CharacterDetailFragment"
         android:label="*Detail'"
-        tools:layout="@layout/fragment_character_detail" />
+        tools:layout="@layout/fragment_character_detail">
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+
+    </fragment>
+
 </navigation>

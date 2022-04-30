@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Breaking Bad</string>
+    <string name="name">Név</string>
+    <string name="search">Keresés</string>
 </resources>

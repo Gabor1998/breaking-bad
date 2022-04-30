@@ -19,7 +19,7 @@ data class CharacterDto(
 fun CharacterDto.toCharacter() = Character(
     id = id,
     name = name,
-    birthday = birthday,
+    birthday = birthday.takeUnless { it == "Unknown" },
     occupation = occupation,
     img = img,
     status = status,
