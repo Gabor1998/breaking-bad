@@ -1,18 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <data>
+
+        <import type="hu.bme.aut.breakingbad.util.StringUtils" />
+
+        <variable
+            name="viewModel"
+            type="hu.bme.aut.breakingbad.ui.characterdetail.CharacterDetailViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingHorizontal="16dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CharacterDetailFragment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="150dp"
+            android:layout_height="225dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:src="@{viewModel.character.img}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{@string/detail_id(viewModel.character.id)}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/name"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Id: 1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/detail_name(viewModel.character.name)}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/portrayed"
+            app:layout_constraintStart_toStartOf="@id/id"
+            app:layout_constraintTop_toBottomOf="@+id/id"
+            tools:text="Name: Walter White" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/portrayed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/detail_portrayed(viewModel.character.portrayed)}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/birthday"
+            app:layout_constraintStart_toStartOf="@id/id"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="Portrayed: Bryan Cranston" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/detail_birthday(viewModel.character.birthday)}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/status"
+            app:layout_constraintStart_toStartOf="@id/id"
+            app:layout_constraintTop_toBottomOf="@+id/portrayed"
+            tools:text="Birthday: 09-07-1958" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/detail_status(viewModel.character.status)}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/image"
+            app:layout_constraintStart_toStartOf="@id/id"
+            app:layout_constraintTop_toBottomOf="@+id/birthday"
+            tools:text="Status: Deceased" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label_appearances"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/detail_season_appearances"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appearances"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text='@{StringUtils.INSTANCE.comaSeparate(viewModel.character.appearance)}'
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_appearances"
+            tools:text="1, 2, 3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label_occupation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_occupation"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appearances" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/occupation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text='@{StringUtils.INSTANCE.lineSeparate(viewModel.character.occupation)}'
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_occupation"
+            tools:text="Teacher" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
