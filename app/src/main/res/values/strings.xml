@@ -8,6 +8,6 @@
     <string name="detail_birthday">Birthday: %s</string>
     <string name="detail_status">Status: %s</string>
     <string name="detail_occupation">Occupation</string>
-    <string name="detail_season_appearances">Season appearances:</string>
+    <string name="detail_season_appearances">Season appearances</string>
     <string name="detail_title">Detail</string>
 </resources>

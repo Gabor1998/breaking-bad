@@ -7,16 +7,16 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 @BindingAdapter("android:src")
-fun AppCompatImageView.setImage(url: String?) {
+fun AppCompatImageView.setImage(url: String?) = url?.let {
     Glide.with(context)
-        .load(url?.toUri())
+        .load(url.toUri())
         .into(this)
 }
 
 @BindingAdapter("circle_image")
-fun AppCompatImageView.setCircleImage(url: String?) {
+fun AppCompatImageView.setCircleImage(url: String?) = url?.let {
     Glide.with(context)
-        .load(url?.toUri())
+        .load(url.toUri())
         .apply(RequestOptions.circleCropTransform())
         .into(this)
 }

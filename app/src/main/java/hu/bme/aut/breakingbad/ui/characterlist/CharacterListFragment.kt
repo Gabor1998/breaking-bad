@@ -24,7 +24,7 @@ class CharacterListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentCharacterListBinding.inflate(inflater)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         with(binding) {
             characterList.adapter = adapter
