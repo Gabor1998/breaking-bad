@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface BreakingBadApi {
 
     @GET("characters")
-    suspend fun getCharactersByName(@Query("name") name: String?): List<CharacterDto>
+    suspend fun getCharactersByName(@Query("name") name: String? = null): List<CharacterDto>
 
     @GET("characters/{id}")
     suspend fun getCharacter(@Path("id") id: Int): CharacterDto
