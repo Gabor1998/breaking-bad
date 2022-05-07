@@ -16,6 +16,8 @@ class CharacterListViewModel @Inject constructor(
 
     val characters = MutableLiveData(emptyList<Character>())
     val name = MutableLiveData("")
+    val loading = MutableLiveData<Boolean>()
+    val empty = MutableLiveData<Boolean>()
 
     init {
         loadCharactersByName()
@@ -23,7 +25,13 @@ class CharacterListViewModel @Inject constructor(
 
     fun loadCharactersByName() {
         viewModelScope.launch {
-            characters.value = getCharactersUseCase.invoke(name.value.orEmpty())
+            loading.value = true
+
+            val results = getCharactersUseCase.invoke(name.value.orEmpty())
+            characters.value = results
+            empty.value = results.isEmpty()
+
+            loading.value = false
         }
     }
 }

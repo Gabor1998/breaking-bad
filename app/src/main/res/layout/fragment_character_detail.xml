@@ -141,6 +141,13 @@
             app:layout_constraintTop_toBottomOf="@id/occupation"
             tools:text="Quote" />
 
+        <include
+            layout="@layout/view_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visible="@{viewModel.loading}"
+            tools:visibility="gone" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

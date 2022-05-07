@@ -23,6 +23,7 @@ class CharacterDetailViewModel @Inject constructor(
 
     val character = MutableLiveData<Character>()
     val quote = MutableLiveData<Quote>()
+    val loading = MutableLiveData<Boolean>()
 
     init {
         loadCharacter()
@@ -30,16 +31,16 @@ class CharacterDetailViewModel @Inject constructor(
 
     private fun loadCharacter() {
         viewModelScope.launch {
+            loading.value = true
+
             getCharacterUseCase(id)?.let {
                 character.value = it
                 getRandomQuoteByAuthor(it.name).onSuccess { result ->
                     quote.value = result
                 }
-            } ?: showError()
-        }
-    }
+            }
 
-    private fun showError() {
-        TODO()
+            loading.value = false
+        }
     }
 }
