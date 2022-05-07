@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="character"
+            type="hu.bme.aut.breakingbad.model.Character" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:circle_image="@{character.img}"
+            app:layout_constraintBottom_toBottomOf="@id/birthday"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{character.name}"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Walter White" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/portrayed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{character.portrayed}"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/name"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            tools:text="Bryan Cranston" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{character.birthday}"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/name"
+            app:layout_constraintTop_toBottomOf="@id/portrayed"
+            tools:text="09-07-1958" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
