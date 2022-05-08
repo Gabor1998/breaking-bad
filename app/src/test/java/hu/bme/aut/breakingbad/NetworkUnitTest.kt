@@ -104,7 +104,7 @@ class NetworkUnitTest {
         author = "Jesse Pinkman"
     )
 
-    private fun readJsonFromAssets(context: Context, filePath: String): String? {
+    private fun readJsonFromAssets(filePath: String): String? {
         return try {
             val source = context.assets.open(filePath).source().buffer()
             source.readByteString().string(Charset.forName("utf-8"))
@@ -118,8 +118,8 @@ class NetworkUnitTest {
     @Test
     fun getCharacterTest() = runTest {
         // Arrange
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(readJsonFromAssets(context, "getCharacter1.json").orEmpty()))
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(readJsonFromAssets(context, "getCharacter2.json").orEmpty()))
+        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(readJsonFromAssets("getCharacter1.json").orEmpty()))
+        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(readJsonFromAssets("getCharacter2.json").orEmpty()))
 
         // Act
         val character1 = api.getCharacter(1)
@@ -134,7 +134,7 @@ class NetworkUnitTest {
     @Test
     fun getCharacterListTest() = runTest {
         // Arrange
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(readJsonFromAssets(context, "getCharacters.json").orEmpty()))
+        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(readJsonFromAssets("getCharacters.json").orEmpty()))
 
         // Act
         val characters = api.getCharactersByName()
@@ -147,7 +147,7 @@ class NetworkUnitTest {
     @Test
     fun getCharactersByNameTest() = runTest {
         // Arrange
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(readJsonFromAssets(context, "getCharactersByName.json").orEmpty()))
+        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(readJsonFromAssets("getCharactersByName.json").orEmpty()))
 
         // Act
         val characters = api.getCharactersByName("Walter")
@@ -160,7 +160,7 @@ class NetworkUnitTest {
     @Test
     fun getRandomQuoteByAuthorTest() = runTest {
         // Arrange
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(readJsonFromAssets(context, "getRandomQuoteByAuthor.json").orEmpty()))
+        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(readJsonFromAssets("getRandomQuoteByAuthor.json").orEmpty()))
 
         // Act
         val randomQuote = api.getRandomQuoteByAuthor("Jesse Pinkman")
