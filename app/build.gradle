@@ -4,6 +4,17 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'jacoco'
+}
+
+configurations.all{
+    resolutionStrategy {
+        eachDependency { details ->
+            if ('org.jacoco' == details.requested.group) {
+                details.useVersion "0.8.8"
+            }
+        }
+    }
 }
 
 android {
@@ -23,6 +34,7 @@ android {
         debug {
             debuggable true
             minifyEnabled false
+            testCoverageEnabled true
         }
         release {
             minifyEnabled false
@@ -44,6 +56,15 @@ android {
             includeAndroidResources = true
         }
     }
+}
+
+jacoco {
+    toolVersion = '0.8.8'
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
 }
 
 dependencies {
