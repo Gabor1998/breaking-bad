@@ -4,6 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.breakingbad.domain.GetCharacterUseCase
 import hu.bme.aut.breakingbad.domain.GetRandomQuoteByAuthor
@@ -38,9 +42,18 @@ class CharacterDetailViewModel @Inject constructor(
                 getRandomQuoteByAuthor(it.name).onSuccess { result ->
                     quote.value = result
                 }
+
+                createFirebaseEvent(it)
             }
 
             loading.value = false
+        }
+    }
+
+    private fun createFirebaseEvent(character: Character) {
+        Firebase.analytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM) {
+            param(FirebaseAnalytics.Param.ITEM_ID, character.id.toLong())
+            param(FirebaseAnalytics.Param.ITEM_NAME, character.name)
         }
     }
 }
